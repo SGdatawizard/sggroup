@@ -1,35 +1,12 @@
 :root {
-  /* Light theme */
-  --paper: #f4f1e9;
-  --card: #ffffff;
-  --ink: #14243a;
-  --ink-mute: #5e6b7b;
-  --gold: #b08a34;
+  --paper: #f4f1e9;      /* off-white page background */
+  --card: #ffffff;       /* card surface */
+  --ink: #14243a;        /* navy text */
+  --ink-mute: #5e6b7b;   /* muted text */
+  --gold: #b08a34;       /* SG gold */
   --gold-deep: #8a6c24;
-  --line: #e6e0d2;
-  --shadow: 24, 36, 58;
-  --glow-1: rgba(176, 138, 52, 0.12);
-  --glow-2: rgba(40, 90, 150, 0.10);
-  --glow-3: rgba(120, 90, 170, 0.08);
-  --track: #e6e0d2;
-  --knob: #ffffff;
-}
-
-html.dark {
-  /* Dark theme */
-  --paper: #0b1420;
-  --card: #14223a;
-  --ink: #f3efe6;
-  --ink-mute: #9aa6b6;
-  --gold: #d8b25a;
-  --gold-deep: #e3cd92;
-  --line: rgba(243, 239, 230, 0.1);
-  --shadow: 0, 0, 0;
-  --glow-1: rgba(216, 178, 90, 0.22);
-  --glow-2: rgba(34, 170, 156, 0.2);
-  --glow-3: rgba(122, 96, 200, 0.2);
-  --track: #223149;
-  --knob: #d8b25a;
+  --line: #e6e0d2;       /* hairline border */
+  --shadow: 24, 36, 58;  /* navy-tinted shadow rgb */
 }
 
 * {
@@ -48,197 +25,12 @@ body {
   font-family: "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-/* ---------- Animated background ---------- */
-.bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  background: var(--paper);
-  transition: background-color 0.5s ease;
-}
-
-.blob {
-  position: absolute;
-  width: 60vmax;
-  height: 60vmax;
-  border-radius: 50%;
-  filter: blur(40px);
-  opacity: 0.9;
-  will-change: transform;
-  transition: opacity 0.5s ease;
-}
-
-html.dark .blob {
-  opacity: 0;
-}
-
-.b1 {
-  top: -22vmax;
-  left: -15vmax;
-  background: radial-gradient(circle at center, var(--glow-1), transparent 65%);
-  animation: drift1 26s ease-in-out infinite alternate;
-}
-
-.b2 {
-  bottom: -25vmax;
-  right: -18vmax;
-  background: radial-gradient(circle at center, var(--glow-2), transparent 65%);
-  animation: drift2 32s ease-in-out infinite alternate;
-}
-
-.b3 {
-  top: 25%;
-  left: 35%;
-  background: radial-gradient(circle at center, var(--glow-3), transparent 65%);
-  animation: drift3 38s ease-in-out infinite alternate;
-}
-
-@keyframes drift1 {
-  to {
-    transform: translate(18vmax, 12vmax) scale(1.15);
-  }
-}
-@keyframes drift2 {
-  to {
-    transform: translate(-16vmax, -10vmax) scale(1.1);
-  }
-}
-@keyframes drift3 {
-  to {
-    transform: translate(-12vmax, 14vmax) scale(1.2);
-  }
-}
-
-/* ---------- Layout ---------- */
 .page {
-  position: relative;
   max-width: 1180px;
   margin: 0 auto;
   padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 5vw, 3rem) 4rem;
-}
-
-/* ---------- Theme toggle (3D switch by Uiverse / mahiatlinux) ---------- */
-.switch-wrap {
-  position: absolute;
-  top: clamp(1.25rem, 3vw, 2rem);
-  right: clamp(1.5rem, 5vw, 3rem);
-  z-index: 5;
-}
-
-.switch {
-  font-size: 17px;
-  position: relative;
-  display: inline-block;
-  width: 5em;
-  height: 2.5em;
-  user-select: none;
-}
-.switch .cb {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-.toggle {
-  position: absolute;
-  cursor: pointer;
-  width: 100%;
-  height: 100%;
-  background-color: #1a1a1a;
-  border-radius: 0.1em;
-  transition: 0.4s;
-  text-transform: uppercase;
-  font-weight: 700;
-  overflow: hidden;
-  box-shadow:
-    -0.3em 0 0 0 #1a1a1a,
-    -0.3em 0.3em 0 0 #1a1a1a,
-    0.3em 0 0 0 #1a1a1a,
-    0.3em 0.3em 0 0 #1a1a1a,
-    0 0.3em 0 0 #1a1a1a;
-}
-.toggle > .left {
-  position: absolute;
-  display: flex;
-  width: 50%;
-  height: 88%;
-  background-color: #2c2c2c;
-  color: #f3f3f3;
-  left: 0;
-  bottom: 0;
-  align-items: center;
-  justify-content: center;
-  transform-origin: right;
-  transform: rotateX(10deg);
-  transform-style: preserve-3d;
-  transition: all 150ms;
-}
-.left::before {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  background-color: #3a3a3a;
-  transform-origin: center left;
-  transform: rotateY(90deg);
-}
-.left::after {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  background-color: #1e1e1e;
-  transform-origin: center bottom;
-  transform: rotateX(90deg);
-}
-.toggle > .right {
-  position: absolute;
-  display: flex;
-  width: 50%;
-  height: 88%;
-  background-color: #2c2c2c;
-  color: #3a3a3a;
-  right: 1px;
-  bottom: 0;
-  align-items: center;
-  justify-content: center;
-  transform-origin: left;
-  transform: rotateX(10deg) rotateY(-45deg);
-  transform-style: preserve-3d;
-  transition: all 150ms;
-}
-.right::before {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  background-color: #3a3a3a;
-  transform-origin: center right;
-  transform: rotateY(-90deg);
-}
-.right::after {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  background-color: #1e1e1e;
-  transform-origin: center bottom;
-  transform: rotateX(90deg);
-}
-.switch input:checked + .toggle > .left {
-  transform: rotateX(10deg) rotateY(45deg);
-  color: #3a3a3a;
-}
-.switch input:checked + .toggle > .right {
-  transform: rotateX(10deg) rotateY(0deg);
-  color: #6b96e0;
-}
-.switch input:focus-visible + .toggle {
-  outline: 3px solid var(--gold);
-  outline-offset: 0.35em;
 }
 
 /* ---------- Masthead ---------- */
@@ -365,7 +157,6 @@ html.dark .blob {
   background: var(--card);
   border-radius: 13px;
   overflow: hidden;
-  transition: background-color 0.5s ease;
 }
 
 .card-head {
@@ -422,16 +213,14 @@ html.dark .blob {
 
 @media (prefers-reduced-motion: reduce) {
   .card,
-  .open,
-  .toggle-knob {
+  .open {
     transition: none;
   }
   .card:hover,
   .card:focus-visible {
     transform: none;
   }
-  .card::before,
-  .blob {
+  .card::before {
     animation: none;
   }
 }
