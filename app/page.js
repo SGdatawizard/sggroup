@@ -6,7 +6,7 @@ const tools = [
     href: "https://www.sggbdata.com/password",
     image: sgData,
     description:
-      "A full catalogue of passed GB items auctioned with Stanley Gibbons.",
+      "A full catalogue of past GB items auctioned with Stanley Gibbons.",
   },
   {
     title: "SG Anthology",
