@@ -46,15 +46,17 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <div className="card-head">
-              <h2 className="card-title">{tool.title}</h2>
-              <span className="open">Open ↗</span>
+            <div className="card-inner">
+              <div className="card-head">
+                <h2 className="card-title">{tool.title}</h2>
+                <span className="open">Open ↗</span>
+              </div>
+              <div className="shot">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={tool.image} alt={`${tool.title} screenshot`} />
+              </div>
+              <p className="desc">{tool.description}</p>
             </div>
-            <div className="shot">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={tool.image} alt={`${tool.title} screenshot`} />
-            </div>
-            <p className="desc">{tool.description}</p>
           </a>
         ))}
       </section>
