@@ -1,12 +1,35 @@
 :root {
-  --paper: #f4f1e9;      /* off-white page background */
-  --card: #ffffff;       /* card surface */
-  --ink: #14243a;        /* navy text */
-  --ink-mute: #5e6b7b;   /* muted text */
-  --gold: #b08a34;       /* SG gold */
+  /* Light theme */
+  --paper: #f4f1e9;
+  --card: #ffffff;
+  --ink: #14243a;
+  --ink-mute: #5e6b7b;
+  --gold: #b08a34;
   --gold-deep: #8a6c24;
-  --line: #e6e0d2;       /* hairline border */
-  --shadow: 24, 36, 58;  /* navy-tinted shadow rgb */
+  --line: #e6e0d2;
+  --shadow: 24, 36, 58;
+  --glow-1: rgba(176, 138, 52, 0.12);
+  --glow-2: rgba(40, 90, 150, 0.10);
+  --glow-3: rgba(120, 90, 170, 0.08);
+  --track: #e6e0d2;
+  --knob: #ffffff;
+}
+
+html.dark {
+  /* Dark theme */
+  --paper: #0b1420;
+  --card: #14223a;
+  --ink: #f3efe6;
+  --ink-mute: #9aa6b6;
+  --gold: #d8b25a;
+  --gold-deep: #e3cd92;
+  --line: rgba(243, 239, 230, 0.1);
+  --shadow: 0, 0, 0;
+  --glow-1: rgba(216, 178, 90, 0.22);
+  --glow-2: rgba(34, 170, 156, 0.2);
+  --glow-3: rgba(122, 96, 200, 0.2);
+  --track: #223149;
+  --knob: #d8b25a;
 }
 
 * {
@@ -25,12 +48,120 @@ body {
   font-family: "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
+/* ---------- Animated background ---------- */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: var(--paper);
+  transition: background-color 0.5s ease;
+}
+
+.blob {
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.9;
+  will-change: transform;
+}
+
+.b1 {
+  top: -22vmax;
+  left: -15vmax;
+  background: radial-gradient(circle at center, var(--glow-1), transparent 65%);
+  animation: drift1 26s ease-in-out infinite alternate;
+}
+
+.b2 {
+  bottom: -25vmax;
+  right: -18vmax;
+  background: radial-gradient(circle at center, var(--glow-2), transparent 65%);
+  animation: drift2 32s ease-in-out infinite alternate;
+}
+
+.b3 {
+  top: 25%;
+  left: 35%;
+  background: radial-gradient(circle at center, var(--glow-3), transparent 65%);
+  animation: drift3 38s ease-in-out infinite alternate;
+}
+
+@keyframes drift1 {
+  to {
+    transform: translate(18vmax, 12vmax) scale(1.15);
+  }
+}
+@keyframes drift2 {
+  to {
+    transform: translate(-16vmax, -10vmax) scale(1.1);
+  }
+}
+@keyframes drift3 {
+  to {
+    transform: translate(-12vmax, 14vmax) scale(1.2);
+  }
+}
+
+/* ---------- Layout ---------- */
 .page {
+  position: relative;
   max-width: 1180px;
   margin: 0 auto;
   padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 5vw, 3rem) 4rem;
+}
+
+/* ---------- Theme toggle ---------- */
+.theme-toggle {
+  position: absolute;
+  top: clamp(1.25rem, 3vw, 2rem);
+  right: clamp(1.25rem, 5vw, 3rem);
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.toggle-track {
+  display: flex;
+  align-items: center;
+  width: 58px;
+  height: 30px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--track);
+  border: 1px solid var(--line);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.toggle-knob {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--knob);
+  color: var(--ink);
+  font-size: 13px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 0.4s ease;
+}
+
+html.dark .toggle-knob {
+  transform: translateX(28px);
+  color: #0b1420;
+}
+
+.theme-toggle:focus-visible .toggle-track {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
 }
 
 /* ---------- Masthead ---------- */
@@ -51,9 +182,9 @@ body {
   place-items: center;
   width: 2.2rem;
   height: 2.2rem;
-  background: var(--ink);
+  background: #14243a;
   border-radius: 6px;
-  color: var(--gold);
+  color: #d8b25a;
   font-family: "Fraunces", Georgia, serif;
   font-weight: 600;
   font-size: 0.95rem;
@@ -89,11 +220,10 @@ body {
   gap: clamp(1.5rem, 4vw, 2.25rem);
 }
 
-/* Outer element = the animated gradient frame */
 .card {
   position: relative;
   display: block;
-  padding: 3px; /* border thickness */
+  padding: 3px;
   border-radius: 16px;
   overflow: hidden;
   isolation: isolate;
@@ -152,13 +282,13 @@ body {
   outline-offset: 3px;
 }
 
-/* Inner element = the white card surface, sits above the gradient */
 .card-inner {
   position: relative;
   z-index: 1;
   background: var(--card);
   border-radius: 13px;
   overflow: hidden;
+  transition: background-color 0.5s ease;
 }
 
 .card-head {
@@ -215,14 +345,16 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .card,
-  .open {
+  .open,
+  .toggle-knob {
     transition: none;
   }
   .card:hover,
   .card:focus-visible {
     transform: none;
   }
-  .card::before {
+  .card::before,
+  .blob {
     animation: none;
   }
 }
