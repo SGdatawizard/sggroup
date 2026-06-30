@@ -82,31 +82,67 @@ body {
   color: var(--ink);
 }
 
-/* ---------- Cards ---------- */
+/* ---------- Cards with animated gradient border ---------- */
 .album {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: clamp(1.5rem, 4vw, 2.25rem);
 }
 
+/* Outer element = the animated gradient frame */
 .card {
+  position: relative;
   display: block;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 14px;
+  padding: 3px; /* border thickness */
+  border-radius: 16px;
   overflow: hidden;
+  isolation: isolate;
   text-decoration: none;
   color: var(--ink);
   box-shadow: 0 1px 2px rgba(var(--shadow), 0.06),
     0 10px 24px rgba(var(--shadow), 0.07);
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow 0.3s ease;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    #4fcf70,
+    #fad648,
+    #a767e5,
+    #12bcfe,
+    #44ce7b
+  );
+  background-size: 25% 100%;
+  animation: gradient-border 0.75s linear infinite;
+  animation-play-state: paused;
+  translate: -5% 0%;
+  transition: translate 0.25s ease-out;
+}
+
+.card:hover::before,
+.card:focus-visible::before {
+  animation-play-state: running;
+  transition-duration: 0.75s;
+  translate: 0% 0%;
+}
+
+@keyframes gradient-border {
+  to {
+    transform: translateX(-25%);
+  }
 }
 
 .card:hover,
 .card:focus-visible {
   transform: translateY(-5px);
-  border-color: #ddd3bd;
   box-shadow: 0 2px 4px rgba(var(--shadow), 0.08),
     0 18px 34px rgba(var(--shadow), 0.12);
 }
@@ -114,6 +150,15 @@ body {
 .card:focus-visible {
   outline: 3px solid var(--gold);
   outline-offset: 3px;
+}
+
+/* Inner element = the white card surface, sits above the gradient */
+.card-inner {
+  position: relative;
+  z-index: 1;
+  background: var(--card);
+  border-radius: 13px;
+  overflow: hidden;
 }
 
 .card-head {
@@ -176,5 +221,8 @@ body {
   .card:hover,
   .card:focus-visible {
     transform: none;
+  }
+  .card::before {
+    animation: none;
   }
 }
