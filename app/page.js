@@ -1,7 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { sgData, sgAnthology, sgAuctions } from "./images";
+
+// WebGL background — client-only so it never runs during server render
+const LightPillar = dynamic(() => import("./LightPillar"), { ssr: false });
 
 const tools = [
   {
@@ -40,20 +44,40 @@ export default function Home() {
         <span className="blob b1" />
         <span className="blob b2" />
         <span className="blob b3" />
+        {dark && (
+          <LightPillar
+            topColor="#5227FF"
+            bottomColor="#FF9FFC"
+            intensity={1}
+            rotationSpeed={0.3}
+            glowAmount={0.002}
+            pillarWidth={3}
+            pillarHeight={0.4}
+            noiseIntensity={0.5}
+            pillarRotation={25}
+            interactive={false}
+            mixBlendMode="screen"
+            quality="high"
+          />
+        )}
       </div>
 
       <main className="page">
-        <button
-          type="button"
-          className="theme-toggle"
-          onClick={() => setDark((d) => !d)}
-          aria-pressed={dark}
-          aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-        >
-          <span className="toggle-track">
-            <span className="toggle-knob">{dark ? "☾" : "☀"}</span>
-          </span>
-        </button>
+        <div className="switch-wrap">
+          <label className="switch">
+            <input
+              type="checkbox"
+              className="cb"
+              checked={dark}
+              onChange={(e) => setDark(e.target.checked)}
+              aria-label="Toggle dark mode"
+            />
+            <span className="toggle">
+              <span className="left" />
+              <span className="right" />
+            </span>
+          </label>
+        </div>
 
         <header className="masthead">
           <div className="brand">
