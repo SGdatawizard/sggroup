@@ -1,22 +1,24 @@
+import { sgData, sgAnthology, sgAuctions } from "./images";
+
 const tools = [
   {
     title: "SG Data",
     href: "https://www.sggbdata.com/password",
-    image: "/sg-data.png",
+    image: sgData,
     description:
       "A full catalogue of passed GB items auctioned with Stanley Gibbons.",
   },
   {
     title: "SG Anthology",
     href: "https://sganthology-gzk7.vercel.app/",
-    image: "/sg-anthology.png",
+    image: sgAnthology,
     description:
       "A sales tool to help match customers to their categories, and sell more stock.",
   },
   {
     title: "SG Auctions",
     href: "https://sg-auctions.vercel.app/",
-    image: "/sg-auctions.png",
+    image: sgAuctions,
     description:
       "A full auction stats tracker to map how our auctions are performing.",
   },
@@ -32,40 +34,30 @@ export default function Home() {
             Stanley <em>Gibbons</em>
           </span>
         </div>
-        <p className="eyebrow">Internal toolkit · Est. 1856</p>
-        <h1 className="title">Three tools, one drawer.</h1>
-        <p className="lede">Pick a tool to get to work.</p>
+        <h1 className="title">Welcome!</h1>
       </header>
 
       <section className="album" aria-label="Tools">
         {tools.map((tool) => (
           <a
             key={tool.title}
-            className="stamp"
+            className="card"
             href={tool.href}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <div className="stamp-inner">
-              <div className="stamp-head">
-                <h2 className="stamp-title">{tool.title}</h2>
-                <span className="open">Open ↗</span>
-              </div>
-              <div className="shot">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={tool.image} alt={`${tool.title} screenshot`} />
-              </div>
-              <p className="desc">{tool.description}</p>
+            <div className="card-head">
+              <h2 className="card-title">{tool.title}</h2>
+              <span className="open">Open ↗</span>
             </div>
+            <div className="shot">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={tool.image} alt={`${tool.title} screenshot`} />
+            </div>
+            <p className="desc">{tool.description}</p>
           </a>
         ))}
       </section>
-
-      <footer className="footer">
-        <span>Stanley Gibbons</span>
-        <span className="sep">·</span>
-        <span>For internal use</span>
-      </footer>
     </main>
   );
 }
