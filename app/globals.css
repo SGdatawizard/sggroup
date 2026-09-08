@@ -28,7 +28,7 @@ body {
 }
 
 .page {
-  max-width: 1180px;
+  max-width: 1720px;
   margin: 0 auto;
   padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 5vw, 3rem) 4rem;
 }
@@ -186,7 +186,7 @@ body {
 .card-title {
   font-family: "Fraunces", Georgia, serif;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin: 0;
   color: var(--ink);
 }
@@ -207,7 +207,7 @@ body {
 }
 
 .shot {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 2 / 1;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   background: #0d1825;
@@ -226,7 +226,7 @@ body {
   flex: 1 1 auto;
   margin: 0;
   padding: 1rem 1.25rem 1.25rem;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   line-height: 1.5;
   color: var(--ink-mute);
 }
