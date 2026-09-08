@@ -1,4 +1,4 @@
-import { sgData, sgAnthology, sgAuctions } from "./images";
+import { sgData, sgAnthology, sgAuctions, sgConsignments } from "./images";
 
 const tools = [
   {
@@ -6,7 +6,7 @@ const tools = [
     href: "https://www.sggbdata.com/password",
     image: sgData,
     description:
-      "A full catalogue of past GB items auctioned with Stanley Gibbons.",
+      "A full catalogue of passed GB items auctioned with Stanley Gibbons.",
   },
   {
     title: "SG Anthology",
@@ -21,6 +21,13 @@ const tools = [
     image: sgAuctions,
     description:
       "A full auction stats tracker to map how our auctions are performing.",
+  },
+  {
+    title: "SG Consignments",
+    href: "https://consignment-tracker-tan.vercel.app/overview",
+    image: sgConsignments,
+    description:
+      "Track consignments from intake to completion — receipts, vendors and deadlines all in one place.",
   },
 ];
 
