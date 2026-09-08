@@ -85,8 +85,20 @@ body {
 /* ---------- Cards with animated gradient border ---------- */
 .album {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(1.5rem, 4vw, 2.25rem);
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+@media (max-width: 1024px) {
+  .album {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .album {
+    grid-template-columns: 1fr;
+  }
 }
 
 .card {
@@ -96,6 +108,7 @@ body {
   border-radius: 16px;
   overflow: hidden;
   isolation: isolate;
+  height: 100%;
   text-decoration: none;
   color: var(--ink);
   box-shadow: 0 1px 2px rgba(var(--shadow), 0.06),
@@ -154,6 +167,9 @@ body {
 .card-inner {
   position: relative;
   z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   background: var(--card);
   border-radius: 13px;
   overflow: hidden;
@@ -170,7 +186,7 @@ body {
 .card-title {
   font-family: "Fraunces", Georgia, serif;
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin: 0;
   color: var(--ink);
 }
@@ -191,6 +207,7 @@ body {
 }
 
 .shot {
+  aspect-ratio: 16 / 10;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   background: #0d1825;
@@ -200,13 +217,16 @@ body {
 .shot img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
 }
 
 .desc {
+  flex: 1 1 auto;
   margin: 0;
   padding: 1rem 1.25rem 1.25rem;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   line-height: 1.5;
   color: var(--ink-mute);
 }
